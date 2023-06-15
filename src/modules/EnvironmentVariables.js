@@ -1,4 +1,3 @@
-module.exports = EnvironmentVariables = {
+module.exports = {
   getVariable: (key) => process.env[key] || '',
 };
-

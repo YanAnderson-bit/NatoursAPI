@@ -16,11 +16,12 @@ module.exports = {
 
   getTour: (req, res) => {
     const tourId = Number(req.params.id);
-    const tour = tours.find((tour) => tour.id === tourId);
+    const tour = tours.find((item) => item.id === tourId);
     if (!tour) return res.status(404).json({ status: 'fail' });
     return res.status(200).json({ status: 'success', tour });
   },
   updateTour: (req, res) => {},
-  createTour: (req, res) => res.status(200).json({status:'sucess',tour:req.body}),
+  createTour: (req, res) =>
+    res.status(200).json({ status: 'sucess', tour: req.body }),
   deleteTour: (req, res) => {},
 };

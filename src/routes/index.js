@@ -1,7 +1,7 @@
-const usersRoutes = require('./users')
-const toursRoutes = require('./tours')
+const usersRoutes = require('./users');
+const toursRoutes = require('./tours');
 
 module.exports = {
-    usersRoutes,
-    toursRoutes
-}
+  usersRoutes,
+  toursRoutes,
+};
