@@ -22,7 +22,7 @@ export default {
       .then((document) =>
         res.status(200).json({ status: 'sucess', tour: document })
       )
-      .catch((error) => res.status(200).json({ status: 'fail', error }));
+      .catch((error) => res.status(400).json({ status: 'fail', error }));
   },
   deleteTour: (req, res) => {},
 };
