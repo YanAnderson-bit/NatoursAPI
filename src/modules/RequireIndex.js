@@ -1,3 +1,9 @@
-const requireindex = require('requireindex');
+import requireindex from 'requireindex';
 
-module.exports = (directory) => requireindex(directory);
+export default (directory) => {
+  const directoryFiles = requireindex(directory);
+  return Object.keys(directoryFiles).reduce((memo, key) => {
+    memo[key] = directoryFiles[key].default;
+    return memo;
+  }, {});
+};

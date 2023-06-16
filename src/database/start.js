@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-exports.start = () =>
+export default () =>
   mongoose
     .connect(process.env.DATABASE_LOCAL, {
       useNewUrlParser: true,

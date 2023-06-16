@@ -1,11 +1,14 @@
-require('dotenv').config();
-const database = require('./database/start');
-const EnvironmentVariables = require('./modules/EnvironmentVariables');
-const app = require('./app');
+import dotenv from 'dotenv';
+
+import app from './app';
+import databaseStart from './database/start';
+import EnvironmentVariables from './modules/EnvironmentVariables';
+
+dotenv.config();
 
 const port = EnvironmentVariables.getVariable('SERVER_PORT');
 
-database.start();
+databaseStart();
 
 app.listen(port, () => {
   console.log(`App running on port ${port}....`);

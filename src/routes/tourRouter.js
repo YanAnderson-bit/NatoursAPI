@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 
-const tourController = require('../controllers/tourController');
+import tourController from '../controllers/tourController';
 
 const router = express.Router();
 router
@@ -9,4 +9,4 @@ router
   .post(tourController.checkBody, tourController.createTour);
 router.route('/:id').get(tourController.getTour);
 
-module.exports = router;
+export default router;

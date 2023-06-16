@@ -1,8 +1,8 @@
-const { readFileSync } = require('fs');
+import { readFileSync } from 'fs';
 
 const users = JSON.parse(readFileSync(`${__dirname}/users.json`, 'utf-8'));
 
-module.exports = {
+export default {
   getUsers: (req, res) =>
     res.status(200).json({ results: users.length, users }),
 

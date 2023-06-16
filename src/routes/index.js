@@ -1,3 +1,3 @@
-const RequireIndex = require('../modules/RequireIndex');
+import RequireIndex from '../modules/RequireIndex';
 
-module.exports = RequireIndex(__dirname);
+export default RequireIndex(__dirname);

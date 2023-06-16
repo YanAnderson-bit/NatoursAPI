@@ -1,11 +1,12 @@
-const { readFileSync } = require('fs');
-const TourModel = require('../models/TourModel');
+import { readFileSync } from 'fs';
+
+import TourModel from '../models/TourModel';
 
 const tours = JSON.parse(
   readFileSync(`${__dirname}/tours-simple.json`, 'utf-8')
 );
 
-module.exports = {
+export default {
   checkBody: (req, res, next) => {
     if (!req.body.name || !req.body.price)
       return res
