@@ -1,7 +1,3 @@
-const userRouter = require('./userRouter');
-const tourRouter = require('./tourRouter');
+const RequireIndex = require('../modules/RequireIndex');
 
-module.exports = {
-  userRouter,
-  tourRouter,
-};
+module.exports = RequireIndex(__dirname);
