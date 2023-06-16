@@ -1,6 +1,5 @@
 require('dotenv').config();
 const database = require('./database/start');
-
 const EnvironmentVariables = require('./modules/EnvironmentVariables');
 const app = require('./app');
 
