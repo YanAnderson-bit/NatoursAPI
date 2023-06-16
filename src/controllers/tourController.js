@@ -7,14 +7,6 @@ const tours = JSON.parse(
 );
 
 export default {
-  checkBody: (req, res, next) => {
-    if (!req.body.name || !req.body.price)
-      return res
-        .status(404)
-        .json({ status: 'fail', message: 'Missing tour name or price' });
-    next();
-  },
-
   getTours: (req, res) =>
     res.status(200).json({ results: tours.length, tours }),
 
@@ -25,9 +17,12 @@ export default {
     return res.status(200).json({ status: 'success', tour });
   },
   updateTour: (req, res) => {},
-  createTour: async (req, res) => {
-    const tour = await TourModel.create(req.body);
-    res.status(200).json({ status: 'sucess', tour });
+  createTour: (req, res) => {
+    TourModel.create(req.body)
+      .then((document) =>
+        res.status(200).json({ status: 'sucess', tour: document })
+      )
+      .catch((error) => res.status(200).json({ status: 'fail', error }));
   },
   deleteTour: (req, res) => {},
 };
