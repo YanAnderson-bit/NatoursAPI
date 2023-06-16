@@ -1,28 +1,33 @@
-import { readFileSync } from 'fs';
-
 import TourModel from '../models/TourModel';
 
-const tours = JSON.parse(
-  readFileSync(`${__dirname}/tours-simple.json`, 'utf-8')
-);
-
 export default {
-  getTours: (req, res) =>
-    res.status(200).json({ results: tours.length, tours }),
-
-  getTour: (req, res) => {
-    const tourId = Number(req.params.id);
-    const tour = tours.find((item) => item.id === tourId);
-    if (!tour) return res.status(404).json({ status: 'fail' });
-    return res.status(200).json({ status: 'success', tour });
-  },
-  updateTour: (req, res) => {},
-  createTour: (req, res) => {
-    TourModel.create(req.body)
-      .then((document) =>
-        res.status(200).json({ status: 'sucess', tour: document })
-      )
+  getTours: (req, res) => {
+    TourModel.find()
+      .then((tours) => res.status(200).json({ results: tours.length, tours }))
       .catch((error) => res.status(400).json({ status: 'fail', error }));
   },
-  deleteTour: (req, res) => {},
+
+  getTour: (req, res) => {
+    TourModel.findById(req.params.id)
+      .then((tour) => res.status(200).json({ tour }))
+      .catch((error) => res.status(404).json({ status: 'fail', error }));
+  },
+  updateTour: (req, res) => {
+    TourModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    })
+      .then((tour) => res.status(200).json({ tour }))
+      .catch((error) => res.status(404).json({ status: 'fail', error }));
+  },
+  createTour: (req, res) => {
+    TourModel.create(req.body)
+      .then((tour) => res.status(200).json({ status: 'sucess', tour }))
+      .catch((error) => res.status(400).json({ status: 'fail', error }));
+  },
+  deleteTour: (req, res) => {
+    TourModel.findByIdAndDelete(req.params.id)
+      .then((tour) => res.status(200).json({ status: 'sucess', tour }))
+      .catch((error) => res.status(400).json({ status: 'fail', error }));
+  },
 };
