@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon --exec babel-node ./src/index.js",
-    "prod": "NODE_ENV=production npx nodemon ./src/index.js"
+    "prod": "NODE_ENV=production npx nodemon ./src/index.js",
+    "addToursData":"npx --exec babel-node ./src/scripts/addToursData.js"
   },
   "repository": {
     "type": "git",
