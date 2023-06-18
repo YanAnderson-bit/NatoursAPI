@@ -2,7 +2,19 @@ import TourModel from '../models/TourModel';
 
 export default {
   getTours: (req, res) => {
-    TourModel.find()
+    //FILTERING FIRST
+    let filters = { ...req.query };
+    ['page', 'limit', 'sort', 'fields'].forEach((el) => delete filters[el]);
+    filters = JSON.stringify(filters).replace(
+      /\b(lt|gt|gte|lte)\b/g,
+      (match) => `$${match}`
+    );
+    //SORTING SECOND
+
+    //PAGINATION/LIMIT THIRD
+
+    const query = TourModel.find(JSON.parse(filters));
+    query
       .then((tours) => res.status(200).json({ results: tours.length, tours }))
       .catch((error) => res.status(400).json({ status: 'fail', error }));
   },
