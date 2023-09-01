@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import slugify from 'slugify';
 
 const TourSchema = new mongoose.Schema(
   {
@@ -6,6 +7,9 @@ const TourSchema = new mongoose.Schema(
       type: String,
       required: [true, 'The name is required'],
       trim: true,
+    },
+    slug: {
+      type: String,
     },
     duration: {
       type: Number,
@@ -39,7 +43,6 @@ const TourSchema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [true, ' A tour must have a cover image'],
       trim: true,
     },
     images: [String],
@@ -54,6 +57,11 @@ const TourSchema = new mongoose.Schema(
 
 TourSchema.virtual('durationInWeeks').get(function () {
   return this.duration / 7;
+});
+
+TourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 export default mongoose.model('Tour', TourSchema);
