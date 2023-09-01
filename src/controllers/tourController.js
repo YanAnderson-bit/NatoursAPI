@@ -5,9 +5,9 @@ export default {
   getTours: async (req, res) => {
     try {
       const query = new Query(TourModel, req.query);
-
       query.find().sort().select().paginate();
       const tours = await query.query;
+
       res.status(200).json({ results: tours.length, tours });
     } catch (error) {
       res.status(404).json({ status: 'fail', error });
@@ -104,6 +104,11 @@ export default {
         {
           $project: {
             _id: 0,
+          },
+        },
+        {
+          $sort: {
+            toursQuantity: -1,
           },
         },
       ]);
