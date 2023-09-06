@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 
@@ -10,6 +11,10 @@ const TourSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
+    },
+    secret: {
+      type: Boolean,
+      default: false,
     },
     duration: {
       type: Number,
@@ -61,6 +66,16 @@ TourSchema.virtual('durationInWeeks').get(function () {
 
 TourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+TourSchema.post('save', function (tour, next) {
+  console.log(tour);
+  next();
+});
+
+TourSchema.pre(/^find/, function (next) {
+  this.find({ secret: { $ne: true } });
   next();
 });
 
