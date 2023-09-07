@@ -1,4 +1,4 @@
-import Query from '../modules/QueryModule';
+import Query from '../modules/Query';
 import TourModel from '../models/TourModel';
 
 export default {
