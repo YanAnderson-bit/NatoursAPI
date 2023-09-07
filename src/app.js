@@ -1,7 +1,7 @@
 import express from 'express';
 
 import routers from './routers';
-import routeErrorMiddlewares from './middlewares/routeErrorMiddlewares';
+import routeErrorMiddlewares from './middlewares/routErrorMiddlewares';
 import errorController from './controllers/errorController';
 
 const app = express();
